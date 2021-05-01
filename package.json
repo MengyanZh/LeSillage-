@@ -18,7 +18,7 @@
     "author": "ls",
     "license": "MIT",
     "dependencies": {
-        "antd": "^4.15.3",
+        "antd": "^4.15.4",
         "axios": "^0.21.1",
         "axis": "^1.0.0",
         "bcrypt": "^5.0.1",
