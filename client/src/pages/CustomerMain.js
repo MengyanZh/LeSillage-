@@ -25,6 +25,7 @@ export default function CustomerMain(props) {
 
 
 
+    // welcome!!
     return (
         <>
             <PageHeader title = {"Welcome" + props.location.state.customer.givenName}
