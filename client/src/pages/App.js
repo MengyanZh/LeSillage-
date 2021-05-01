@@ -1,11 +1,10 @@
 import {useState } from 'react';
 import {Jumbotron, Button, OverlayTrigger,Tooltip, Modal, Form} from 'react-bootstrap';
-import '/Users/my_dinuan/STUDY/WEB INFO/pro/new/node_modules/bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "../commons/axios"
 // import { response } from 'express';
 import { message } from 'antd';
 import 'antd/dist/antd.css'
-
 
 function App(props) {
 
