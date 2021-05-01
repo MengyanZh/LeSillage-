@@ -1,3 +1,3 @@
 module.exports = {
-    mongoURL: 'mongodb+srv://menzhang1:zxcvbnm666@hahaha.cch86.mongodb.net/hahaha?authSource=admin&replicaSet=atlas-e395dz-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true'
+    mongoURL: 'mongodb+srv://LeSillage:ls1234@cluster0.mhnoe.mongodb.net/Cluster0?authSource=admin&replicaSet=atlas-6o718q-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true'
 }
