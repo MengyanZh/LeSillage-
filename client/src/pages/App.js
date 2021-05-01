@@ -71,7 +71,7 @@ function App(props) {
         </Modal.Footer>
       </Modal>
       <Jumbotron style = {{background: "white"}}>
-        <h1>Welcome to Snacksinavan</h1>
+        <h1>Welcome to Le Sillage</h1>
         <p>
           tell me more about the van
         </p>

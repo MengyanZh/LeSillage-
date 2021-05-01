@@ -45,10 +45,10 @@ export default function Menu(props){
     return(
         <>
             <Button variant="primary"
-                onClick={handleModalShow}>See Menu</Button>
+                onClick={handleModalShow}>Start order</Button>
             <Modal show={modalVisible} onHide={handleModalClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Menu</Modal.Title>
+                    <Modal.Title>My cart</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {props.snacks.map((snack, index) =>(

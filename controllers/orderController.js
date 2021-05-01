@@ -30,7 +30,7 @@ exports.orderNewPost = function(req, res) {
  */
 exports.orderRequestGet = function(req, res) {
     Order.find(req.query).populate("vendor").populate("customer"). then((orders) => {
-        if (orders.length = 0) {
+        if (orders.length == 0) {
             res.status(404). json({success: false, errMessage: "no order found" }) 
         } else {
             res.status(200).json({success: true, all0rders: orders})
