@@ -1,13 +1,12 @@
-import {useState } from 'react';
+import {useState,  useEffect} from 'react';
 import {Jumbotron, Button, OverlayTrigger,Tooltip, Modal, Form} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "../commons/axios"
-// import { response } from 'express';
 import { message } from 'antd';
 import 'antd/dist/antd.css'
 
 function App(props) {
-
+  
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -20,7 +19,18 @@ function App(props) {
     </Tooltip>
   );
 
-
+  const[lat,setLat] = useState('');
+  const[lng,setLng] = useState('');
+  const[vendors,setVendors] = useState([]);
+  useEffect(() =>{
+    navigator.geolocation.getCurrentPosition(function (position){
+      setLat(position.coords.latitude)
+      setLng(position.coords.longitude)
+    });
+    axios.get('/vender?lat=' + lat + '&lng=' + lng).then(response =>{
+      setVendors(response.data.vendors)
+    })
+  },[lat,lng])
 
   const onLogin = () => {
     axios.post("/customer/login", {email: email, password: password}).then(response => {
