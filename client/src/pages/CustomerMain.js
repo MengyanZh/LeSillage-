@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import {Button} from 'react-bootstrap';
 import {Divider, Drawer, PageHeader} from 'antd';
 import axios from "../commons/axios"
-
+import LeafletMap  from '../components/LeafletMap.js';
 import OrderList from '../components/OrderList.js';
 import Menu from '../components/Menu.js';
 
@@ -42,6 +42,7 @@ export default function CustomerMain(props) {
                 <Divider/>
                 <OrderList orders={orders} />
             </Drawer>
+            <LeafletMap />
         </>
     )
 
