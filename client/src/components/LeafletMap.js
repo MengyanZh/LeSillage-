@@ -12,13 +12,13 @@ export default function LeafletMap(props) {
     
     return (
         <>
-            <MapContainer center={[-37.7963, 144.9614]} zoom={30} scrollWheelZoom={false} style={{height: "90vh"}}>
+            <MapContainer center={props.center} zoom={30} scrollWheelZoom={false} style={{height: "90vh"}}>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     
                 />
-                <Marker position={[-37.7963, 144.9614]} iconUrl = {"https://static.thenounproject.com/png/780108-200.png"}>
+                <Marker position={props.center} iconUrl = {"https://static.thenounproject.com/png/780108-200.png"}>
                     <Popup>Your location </Popup>
                 </Marker>
             </MapContainer>
