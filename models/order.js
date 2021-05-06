@@ -14,6 +14,7 @@ var OrderSchema = new Schema({
             ref: "Vendor",
         },
 
+        
         status: {
             type: String,
             default: 'outstanding',
