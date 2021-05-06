@@ -4,6 +4,7 @@ import {Divider, Drawer, PageHeader} from 'antd';
 import axios from "../commons/axios"
 import LeafletMap  from '../components/LeafletMap.js';
 import OrderList from '../components/OrderList.js';
+import './main.css';
 
 
 export default function CustomerMain(props) {
