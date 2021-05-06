@@ -20,14 +20,14 @@ export default function OrderBrief(props) {
         <div>
             <Modal visible={modalVisible} title = {"OrderId: " + props.order._id}
                 onOk={handleClose} onCancel= {handleClose}>
-                <p>Vendor: {props.order.vendor.name}</p>
+                <p>Vendor: {props.order.vendor._id}</p>
                 <p>{snacks}</p >
             </Modal>
         
             <Card style={{ margin: "10px" }}
                 actions={[<EyeOutlined onClick={handleShow} />, <OverlayTrigger
                     placement="bottom"
-                    delay={{show: 250, hide: 408 }}
+                    delay={{show: 250, hide: 400 }}
                     overlay= {renderTooltip}
                 >
                     <EditOutlined/>
