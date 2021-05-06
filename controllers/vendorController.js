@@ -59,3 +59,33 @@ exports.vendorParkUpdate = function(req, res) {
         }
     );
 };
+/** Get five nearest vendors
+ * (GET) http://localhost:5000/vendor?lat=...&lng=...
+ */
+exports.vendorFiveGet = function(req, res) {
+    Vendor.find().exec((err, vendors) => {
+        if(err){
+            res.status(404).json({success: false, err: err})
+
+        }else{
+            var mapDistance = []
+            for (i = 0; i < vendors.length; i++){
+                var distance = Math.sqrt(Math.hypot(
+                    req.query.lat - vendors[i].location.coordinates[0],
+                    req.query.lng - vendors[i].location.coordinates[1]
+                ))
+                if(Number.isFinite(distance)){
+                    mapDistance.push({
+                        "id":vendors[i].id,
+                        "name":vendors[i].name,
+                        "textAddress":vendors[i].textAddress,
+                        "distance":parseFloat(distance).toFixed(4),
+                        "location":vendors[i].location.coordinates
+                    })
+                }
+            }
+            mapDistance = mapDistance.sort(({distance:a},{distance:b}) => a - b).slice(0, 5)
+            res.status(200).json({success:true, vendors: mapDistance})
+        }
+    })
+};
