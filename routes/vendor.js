@@ -10,4 +10,7 @@ router.post('/register', vendorController.vendorRegisterUpdate);
 // to find or update park status for a specific vendor by its id 
 router.post('/park/:vendorId', vendorController.vendorParkUpdate);
 
+// to get five nearest vendors 
+router.get('/', vendorController.vendorFiveGet);
+
 module.exports = router;

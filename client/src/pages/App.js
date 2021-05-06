@@ -1,10 +1,12 @@
-import {useState } from 'react';
+import {useState, useEffect} from 'react';
 import {Jumbotron, Button, OverlayTrigger,Tooltip, Modal, Form} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "../commons/axios"
 // import { response } from 'express';
-import { message } from 'antd';
+import { message, Typography } from 'antd';
 import 'antd/dist/antd.css'
+
+const{Link}=Typography;
 
 function App(props) {
 
@@ -14,20 +16,34 @@ function App(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const[lat,setLat] = useState('');
+  const[lng,setLng] = useState('');
+  const[vendors,setVendors] = useState([]);
+
   const renderTooltip = (props) => (
     <Tooltip id = 'button-tooltip' {...props}>
       feature still in progess
     </Tooltip>
   );
 
-
+  useEffect(() =>{
+    navigator.geolocation.getCurrentPosition(function (position){
+      setLat(position.coords.latitude)
+      setLng(position.coords.longitude)
+    });
+    axios.get('/vendor?lat='+lat+'&lng='+lng).then(response =>{
+      setVendors(response.data.vendors)
+    })
+  },[lat,lng])
 
   const onLogin = () => {
     axios.post("/customer/login", {email: email, password: password}).then(response => {
       if(response.data.success){
         //传递本页信息到下一页
         props.history.push('/customer', {
-          customer : response.data.customer,
+          customer : response.data.customer, 
+          vendors: vendors, 
+          position: [lat,lng]
         });
       }else{
         message.error(response.data.error)
@@ -35,6 +51,13 @@ function App(props) {
     }).catch(error =>{
       console.log(error)
       })
+  }
+
+  const onSkip = () =>{
+    props.history.push('/customer',{
+      position:[lat, lng],
+      vendors: vendors
+    });
   }
 
 
@@ -51,7 +74,7 @@ function App(props) {
               <Form.Control type="email" placeholder="Enter email"
                 onChange={e => setEmail(e.target.value)} />
               <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
+                We promise that never sharing your details with others = )
               </Form.Text>  
             </Form.Group>
             <Form.Group controlId="formBasicPassword">
@@ -60,29 +83,35 @@ function App(props) {
                 onChange={e => setPassword(e.target.value)} /> 
             </Form.Group>
           </Form>
+          <Link onClick={onSkip}>
+            Skip for now
+            </Link>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="outline-dark" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={onLogin}>
+          <Button variant="dark" onClick={onLogin}>
             Login
           </Button>
         </Modal.Footer>
       </Modal>
       <Jumbotron style = {{background: "white"}}>
-        <h1>Welcome to Le Sillage</h1>
+        <h1>
+        <img alt="" src="/coffee-truck.png" width="70" height="50" className="d-inline-block align-top"/>
+          Welcome to Le Sillage !!
+        </h1>
         <p>
-          tell me more about the van
+          tell me more about the van:
         </p>
         <p>
-          <Button variant = "primary" onClick = {handleShow}>Customer</Button>
+          <Button variant = "outline-dark" onClick = {handleShow}>Customer</Button>
           <OverlayTrigger
             placement = "right"
             delay = {{show:250, hide: 400}}
             overlay = {renderTooltip}
           >
-            <Button variant = "outline-primary" style = {{marginLeft: "1vw"}}>Vendor</Button>
+            <Button variant = "dark" style = {{marginLeft: "1vw"}}>Vendor</Button>
 
           </OverlayTrigger>
         </p>

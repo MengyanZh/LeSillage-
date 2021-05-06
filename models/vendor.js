@@ -18,7 +18,7 @@ var VendorSchema = new Schema({
             enum: ['Point']
         },
         coordinates: {
-            type: [Number]
+            type: [String]
         }
     },
      
